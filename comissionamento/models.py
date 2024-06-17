@@ -12,7 +12,7 @@ class DriverAt(models.Model):
     faixa_ip_se = models.CharField(max_length=20)
     data_de_criacao = models.DateTimeField(blank=True, null=True)
 
-    def criarDriverAt(self):
+    def criar_driver_at(self):
         self.data_de_criacao = timezone.now()
         self.save()
 

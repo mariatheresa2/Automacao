@@ -1,0 +1,14 @@
+{% extends 'comissionamento/base.html' %}
+
+{% block content %}
+    <div class="post">
+        {% if driver_at.data_de_criacao %}
+            <div class="date">
+                {{ driver_at.data_de_criacao }}
+            </div>
+        {% endif %}
+        <a class="btn btn-default" href="{% url 'driver_at_editar' pk=driver_at.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <h2>{{ driver_at.ip }}</h2>
+        <p>{{ driver_at.porta|linebreaksbr }}</p>
+    </div>
+{% endblock %}

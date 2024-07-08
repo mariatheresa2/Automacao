@@ -1,20 +1,39 @@
-from django.conf import settings
 from django.db import models
-from django.utils import timezone
 
-class DriverAt(models.Model):
-    ip = models.CharField(max_length=20)
-    porta = models.IntegerField()
-    dnp = models.IntegerField()
-    range_bi = models.CharField(max_length=10)
-    range_ai = models.CharField(max_length=10)
-    range_bo = models.CharField(max_length=10)
-    faixa_ip_se = models.CharField(max_length=20)
-    data_de_criacao = models.DateTimeField(blank=True, null=True)
+DISTRIBUIDORA = [
+    ('AL', 'Alagoas'),
+    ('AP', 'Amapá'),
+    ('MA', 'Maranhão'),
+    ('GO', 'Goiás'),
+    ('PA', 'Pará'),
+    ('PI', 'Piauí'),
+    ('RS', 'Rio Grande do Sul'),
+]
 
-    def criar_driver_at(self):
-        self.data_de_criacao = timezone.now()
+class Regional(models.Model):
+    nome = models.CharField(max_length=20, null=False, blank=False,
+                            verbose_name='Regional')
+    distribuidora = models.CharField(max_length=20, choices=DISTRIBUIDORA, null=False, 
+                            blank=False, verbose_name='Distribuidora')
+    class Meta():
+        verbose_name = "Regional"
+        verbose_name_plural = "Regionais"
+
+    def __str__(self):
+        return f"{self.distribuidora} - Regional {self.nome}"
+
+class Comissionamento(models.Model):
+    distribuidora = models.CharField(max_length=20, choices=DISTRIBUIDORA, null=False, 
+                            blank=False, verbose_name='Distribuidora')
+    data_solicitacao = models.DateField(auto_now_add=True)
+    data_comissionamento = models.DateField(null=False, blank=False)
+
+    class Meta():
+        verbose_name = "Comissionamento"
+        verbose_name_plural = "Comissionamentos"
+
+    def cadastrar(self):
         self.save()
 
     def __str__(self):
-        return self.ip
+        return f"Comissionamento {self.pk}"

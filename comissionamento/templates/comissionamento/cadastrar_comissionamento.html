@@ -1,0 +1,37 @@
+{% extends 'comissionamento/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Cadastrar comissionamento</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Início</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'comissionamentos' %}">Comissionamentos</a></li>
+        <li class="breadcrumb-item">Cadastrar Comissionamento</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-list me-1"></i>
+            Dados Gerais
+        </div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="card-body">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="fieldWrapper mb-2">
+                            {{ form.distribuidora|as_crispy_field }}
+                        </div>
+                        <div class="fieldWrapper mb-2">
+                            {{ form.data_comissionamento|as_crispy_field }}
+                        </div>                        
+                    </div>
+                </div>                
+            </div>
+            <div class="px-3 mb-4">
+                <button type="submit" class="btn btn-success" style="width:100%;">Cadastrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'comissionamento/base.html' %}
+{% block content %}
+    
+<div class="container-fluid px-4">
+    <div style="justify-content: space-between;flex-direction: row;display: flex;align-items: center;">
+        <h1 class="mt-4">Comissionamentos</h1>
+        <div class="btn-group mt-2">
+            <a href="{% url 'cadastrar_comissionamento' %}" class="btn btn-success"
+                aria-current="page">Nova Solicitação de Comissionamento</a>
+        </div>
+    </div>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Início</a></li>
+        <li class="breadcrumb-item">Comissionamentos</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-body">
+            Bem-vindo ao gerenciamento de Comissionamentos, onde pode ser feito o cadastro, edição, visualização e cancelamento de Comissionamentos.
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Comissionamentos Cadastrados
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Data de Solicitação</th>
+                        <th>Data de Comissionamento</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Código</th>
+                        <th>Data de Solicitação</th>
+                        <th>Data de Comissionamento</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for comissionamento in comissionamentos %}
+                    <tr>
+                        <td>{{comissionamento.pk}}</td>
+                        <td>{{comissionamento.data_solicitacao|date:"d/m/Y"}}</td>
+                        <td>{{comissionamento.data_comissionamento|date:"d/m/Y"}}</td>
+                        <td><a class="btn btn-outline-danger" href="{% url 'cancelar_comissionamento' comissionamento.pk %}">Cancelar</a></td>
+                        <td><a class="btn btn-outline-secondary" href="{% url 'detalhes_comissionamento' comissionamento.pk %}">Ver</a></td>
+                        <td><a class="btn btn-outline-secondary" href="">Relatório</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

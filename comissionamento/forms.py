@@ -1,7 +1,11 @@
-from django import forms
-from .models import DriverAt
+from django.forms import ModelForm, DateField, DateInput
+from .models import Comissionamento
 
-class DriverAtForm(forms.ModelForm):
+class ComissionamentoForm(ModelForm):
+    data_comissionamento = DateField(
+        widget=DateInput(attrs={'type': 'date'}),
+        label='Data de Comissionamento'
+    )
     class Meta:
-        model = DriverAt
-        fields = ('ip', 'porta', 'dnp', 'range_bi', 'range_ai', 'range_bo', 'faixa_ip_se', 'data_de_criacao')
+        model = Comissionamento
+        fields = ['distribuidora', 'data_comissionamento']

@@ -15,7 +15,7 @@
     </ol>
     <div class="card mb-4">
         <div class="card-body">
-            Bem-vindo ao gerenciamento de Comissionamentos, onde pode ser feito o cadastro, edição, visualização e cancelamento de Comissionamentos.
+            Bem-vindo ao gerenciamento de comissionamentos, onde pode ser feito o cadastro, edição, visualização e cancelamento de comissionamentos.
         </div>
     </div>
     <div class="card mb-4">
@@ -28,32 +28,29 @@
                 <thead>
                     <tr>
                         <th>Código</th>
-                        <th>Data de Solicitação</th>
                         <th>Data de Comissionamento</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th>Data de Solicitação</th>
+                        <th>Distribuidora</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
                         <th>Código</th>
-                        <th>Data de Solicitação</th>
                         <th>Data de Comissionamento</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th>Data de Solicitação</th>
+                        <th>Distribuidora</th>
                     </tr>
                 </tfoot>
                 <tbody>
                     {% for comissionamento in comissionamentos %}
                     <tr>
                         <td>{{comissionamento.pk}}</td>
-                        <td>{{comissionamento.data_solicitacao|date:"d/m/Y"}}</td>
                         <td>{{comissionamento.data_comissionamento|date:"d/m/Y"}}</td>
-                        <td><a class="btn btn-outline-danger" href="{% url 'cancelar_comissionamento' comissionamento.pk %}">Cancelar</a></td>
-                        <td><a class="btn btn-outline-secondary" href="{% url 'detalhes_comissionamento' comissionamento.pk %}">Ver</a></td>
-                        <td><a class="btn btn-outline-secondary" href="">Relatório</a></td>
+                        <td>{{comissionamento.data_solicitacao|date:"d/m/Y"}}</td>
+                        <td>{{comissionamento.distribuidora}}</td>
+                        <td><a class="btn btn-sm btn-outline-danger" href="{% url 'cancelar_comissionamento' comissionamento.pk %}">Cancelar</a></td>
+                        <td><a class="btn btn-sm btn-outline-info" href="{% url 'detalhes_comissionamento' comissionamento.pk %}">Visualizar</a></td>
+                        <td><a class="btn btn-sm btn-outline-primary" href="">Relatório</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

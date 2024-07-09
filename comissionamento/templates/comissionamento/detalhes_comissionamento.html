@@ -3,16 +3,16 @@
 {% block content %}
 <div class="container-fluid px-4">
     <div style="justify-content: space-between;flex-direction: row;display: flex;align-items: center;">
-        <h1 class="mt-4">Comisionamento {{ comisionamento.pk }}</h1>
+        <h1 class="mt-4">Comissionamento {{ comissionamento.pk }}</h1>
         <div class="btn-group mt-2">
-            <a href="{% url 'editar_comisionamento' comisionamento.pk %}" class="btn btn-success"
-                aria-current="page">Editar comisionamento</a>
+            <a href="{% url 'editar_comissionamento' comissionamento.pk %}" class="btn btn-success"
+                aria-current="page">Editar comissionamento</a>
         </div>
     </div>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="{% url 'home' %}">Início</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'comisionamentos' %}">Comisionamentos</a></li>
-        <li class="breadcrumb-item">{{ comisionamento.pk }}</li>
+        <li class="breadcrumb-item"><a href="{% url 'comissionamentos' %}">Comissionamentos</a></li>
+        <li class="breadcrumb-item">{{ comissionamento.pk }}</li>
     </ol>
     <div class="card mb-4">
         <div class="card-header">
@@ -23,19 +23,22 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="fieldWrapper" style="margin-bottom: 15px;">
-                        Data de Solciitação: <input disabled class="form-control" id="data_de_solicitacao" type="text" name="data_de_solicitacao" value="{{ comisionamento.data_de_solicitacao }}">
+                        Data de Solicitação: <input disabled class="form-control" id="data_solicitacao" type="text" name="data_solicitacao" value="{{ comissionamento.data_solicitacao }}">
                     </div>
                 </div>
             </div>
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="fieldWrapper" style="margin-bottom: 15px;">
-                        Data de Comissionamento: <input disabled class="form-control" id="data_de_comissionamento" type="text" name="data_de_comissionamento" value="{{ comisionamento.data_de_comissionamento }}">
+                        Data de Comissionamento: <input disabled class="form-control" id="data_comissionamento" type="text" name="data_comissionamento" value="{{ comissionamento.data_comissionamento }}">
                     </div>
                 </div>
             </div>
             <div class="card mb-4">
-                <div class="card-body">                    
+                <div class="card-body">
+                    <div class="fieldWrapper" style="margin-bottom: 15px;">
+                        Distribuidora: <input disabled class="form-control" id="distribuidora" type="text" name="distribuidora" value="{{ comissionamento.distribuidora }}">
+                    </div>
                 </div>
             </div>
         </div>

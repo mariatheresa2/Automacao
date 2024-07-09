@@ -3,7 +3,7 @@ from .models import Comissionamento
 from .forms import ComissionamentoForm
 
 def home(request):
-    return render(request, 'comissionamento/index.html')
+    return render(request, 'comissionamento/home.html')
 
 # Comissionamento
 def comissionamentos(request):
@@ -29,8 +29,8 @@ def editar_comissionamento(request, pk):
         if form.is_valid():
             form.save()
             return redirect('detalhes_comissionamento', comissionamento.pk)
-        else:
-            form = ComissionamentoForm(instance=comissionamento)
+    else:
+        form = ComissionamentoForm(instance=comissionamento)
             
     return render(request, 'comissionamento/editar_comissionamento.html', {'form': form, 'comissionamento': comissionamento})
 

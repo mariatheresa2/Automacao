@@ -1,4 +1,5 @@
 {% extends 'comissionamento/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <div class="container-fluid px-4">
@@ -20,19 +21,15 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="fieldWrapper mb-2">
-                            {{ form.data_de_solicitacao|as_crispy_field }}
+                            {{ form.distribuidora|as_crispy_field }}
                         </div>
                     </div>
                 </div>
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="fieldWrapper mb-2">
-                            {{ form.data_de_comissionamento|as_crispy_field }}
+                            {{ form.data_comissionamento|as_crispy_field }}
                         </div>
-                    </div>
-                </div>
-                <div class="card mb-2">
-                    <div class="card-body">                        
                     </div>
                 </div>
             </div>

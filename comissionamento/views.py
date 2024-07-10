@@ -5,6 +5,10 @@ from .forms import ComissionamentoForm
 def home(request):
     return render(request, 'comissionamento/home.html')
 
+def teste(request):
+    comissionamentos = Comissionamento.objects.all()
+    return render(request, 'comissionamento/teste.html', {'comissionamentos': comissionamentos})
+
 # Comissionamento
 def comissionamentos(request):
     comissionamentos = Comissionamento.objects.all()
@@ -19,7 +23,7 @@ def cadastrar_comissionamento(request):
     else:
         form = ComissionamentoForm()
         
-    return render(request, 'comissionamento/cadastrar_comissionamento.html', {'form': form})
+    return render(request, 'comissionamento/formulario_comissionamento.html', {'form': form, 'modo': 'cadastro'})
 
 def editar_comissionamento(request, pk):
     comissionamento = get_object_or_404(Comissionamento, pk=pk)
@@ -31,13 +35,16 @@ def editar_comissionamento(request, pk):
             return redirect('detalhes_comissionamento', comissionamento.pk)
     else:
         form = ComissionamentoForm(instance=comissionamento)
+        print(comissionamento.data_comissionamento)
             
-    return render(request, 'comissionamento/editar_comissionamento.html', {'form': form, 'comissionamento': comissionamento})
+    return render(request, 'comissionamento/formulario_comissionamento.html', {'form': form, 'comissionamento': comissionamento, 'modo': 'edicao'})
 
 def detalhes_comissionamento(request, pk):
-    comissionamentoPk = str(pk)
-    comissionamento = get_object_or_404(Comissionamento, pk=comissionamentoPk)
-    return render(request, 'comissionamento/detalhes_comissionamento.html', {'comissionamento': comissionamento})
+    comissionamento = get_object_or_404(Comissionamento, pk=str(pk))
+    form = ComissionamentoForm(instance=comissionamento)
+    for field in form.fields.values():
+        field.widget.attrs['disabled'] = True
+    return render(request, 'comissionamento/formulario_comissionamento.html', {'form': form, 'comissionamento': comissionamento, 'modo': 'visualizacao'})
 
 def cancelar_comissionamento(request):
     return render(request, '')

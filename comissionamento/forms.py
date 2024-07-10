@@ -1,10 +1,10 @@
-from django.forms import ModelForm, DateField, DateInput
+from django.forms import ModelForm, DateField, DateInput, TextInput, CharField
 from .models import Comissionamento
 
 class ComissionamentoForm(ModelForm):
     data_comissionamento = DateField(
-        widget=DateInput(attrs={'type': 'date'}),
-        label='Data de Comissionamento'
+        label='Data de Comissionamento',
+        widget=DateInput(format='%Y-%m-%d', attrs={'type': 'date', 'class': 'form-control'}),
     )
     class Meta:
         model = Comissionamento

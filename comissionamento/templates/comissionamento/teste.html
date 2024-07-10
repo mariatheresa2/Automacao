@@ -1,0 +1,55 @@
+{% extends 'comissionamento/base.html' %}
+{% block content %}
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Tables</h1>
+<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+    For more information about DataTables, please visit the <a target="_blank"
+    href="https://datatables.net">official DataTables documentation</a>.</p>
+    
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Comissionamentos Cadastrados</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Data de Comissionamento</th>
+                        <th>Data de Solicitação</th>
+                        <th>Distribuidora</th>
+                        <th>Cancelar</th>
+                        <th>Visualizar</th>
+                        <th>Relatório</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Código</th>
+                        <th>Data de Comissionamento</th>
+                        <th>Data de Solicitação</th>
+                        <th>Distribuidora</th>
+                        <th>Cancelar</th>
+                        <th>Visualizar</th>
+                        <th>Relatório</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for comissionamento in comissionamentos %}
+                    <tr>
+                        <td>{{comissionamento.pk}}</td>
+                        <td>{{comissionamento.data_comissionamento|date:"d/m/Y"}}</td>
+                        <td>{{comissionamento.data_solicitacao|date:"d/m/Y"}}</td>
+                        <td>{{comissionamento.distribuidora}}</td>
+                        <td><a class="btn btn-sm btn-outline-danger" href="{% url 'cancelar_comissionamento' comissionamento.pk %}">Cancelar</a></td>
+                        <td><a class="btn btn-sm btn-outline-info" href="{% url 'detalhes_comissionamento' comissionamento.pk %}">Visualizar</a></td>
+                        <td><a class="btn btn-sm btn-outline-primary" href="">Relatório</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

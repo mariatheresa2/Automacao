@@ -5,18 +5,18 @@
 <div class="container-fluid px-4">
     
     {% if modo == 'cadastro' %}
-    <h1 class="mt-4">Cadastrar Comissionamento</h1>
+    <h2 class="mt-4">Cadastrar Comissionamento</h2>
     {% elif modo == 'edicao' %}
-    <h1 class="mt-4">Editar Comissionamento</h1>
+    <h2 class="mt-4">Editar Comissionamento</h2>
     {% elif modo == 'visualizacao' %}
     <div style="justify-content: space-between;flex-direction: row;display: flex;align-items: center;">
-        <h1 class="mt-4">Detalhes Comissionamento</h1>
+        <h2 class="mt-4">Detalhes Comissionamento</h2>
         <div class="btn-group mt-2">
             <a href="{% url 'editar_comissionamento' comissionamento.pk %}" class="btn btn-warning"
                 aria-current="page">Editar solicitação</a>
             <a href="" class="btn btn-danger"
                 aria-current="page">Cancelar</a>
-            <a href="" class="btn btn-info"
+            <a href="{% url 'historico_comissionamento' comissionamento.pk %}" class="btn btn-info"
                 aria-current="page">Histórico</a>
             <a href="" class="btn btn-primary"
                 aria-current="page">Relatório</a>

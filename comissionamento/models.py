@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 DISTRIBUIDORA = [
     ('AL', 'Alagoas'),
@@ -37,3 +38,19 @@ class Comissionamento(models.Model):
 
     def __str__(self):
         return f"Comissionamento {self.pk}"
+
+class ComissionamentoHistorico(models.Model):
+    comissionamento = models.ForeignKey(Comissionamento, on_delete=models.CASCADE, related_name='historico')
+    campo_alterado = models.CharField(max_length=100)
+    valor_anterior = models.CharField(max_length=255)
+    valor_novo = models.CharField(max_length=255)
+    alterado_em = models.DateTimeField(auto_now_add=True)
+    alterado_por = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+    CAMPO_NOMES = {
+        'distribuidora': 'Distribuidora',
+        'data_comissionamento': 'Data do Comissionamento',
+    }
+
+    def campo_alterado_friendly(self):
+        return self.CAMPO_NOMES.get(self.campo_alterado, self.campo_alterado)

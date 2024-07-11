@@ -1,0 +1,58 @@
+{% extends 'comissionamento/base.html' %}
+{% block content %}
+<div class="container-fluid px-4">
+    <div style="justify-content: space-between;flex-direction: row;display: flex;align-items: center;">
+        <h2 class="mt-4">Histórico Comissionamento</h2>
+        <div class="btn-group mt-2">
+            <a href="{% url 'detalhes_comissionamento' comissionamento.pk %}" class="btn btn-secondary"
+                aria-current="page">Voltar</a>
+        </div>
+    </div>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Início</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'comissionamentos' %}">Comissionamentos</a></li>
+        <li class="breadcrumb-item">Histórico Comissionamento {{ comissionamento.pk }}</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-list me-1"></i>
+            Histórico Comissionamento {{ comissionamento.pk }}
+        </div>        
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Data e Hora</th>
+                            <th>Campo Alterado</th>
+                            <th>Valor Anterior</th>
+                            <th>Valor Novo</th>
+                            <th>Alterado por</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Data e Hora</th>
+                            <th>Campo Alterado</th>
+                            <th>Valor Anterior</th>
+                            <th>Valor Novo</th>
+                            <th>Alterado por</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for item in historico %}
+                        <tr>
+                            <td>{{item.alterado_em|date:"d/m/Y h:i:s"}}</td>
+                            <td>{{item.campo_alterado_friendly }}</td>
+                            <td>{{item.valor_anterior}}</td>
+                            <td>{{item.valor_novo}}</td>
+                            <td>{{item.alterado_por.get_full_name|default:item.alterado_por.username}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
